@@ -5,12 +5,12 @@ import type MenuItem from "../../../../types/menuItem";
 
 interface Props {
   menu: MenuItem[];
-  onAction: (mode: "view" | "edit" | "delete") => void;
+  onAction: (mode: "view" | "edit" | "delete", item:MenuItem) => void;
 }
 
 const Table: React.FC<Props> = ({ menu, onAction }) => {
   return (
-    <table className="min-w-full ">
+    <table className="min-w-full">
       <thead className="bg-gray-100 border-b-2 border-gray-200 uppercase dark:text-black dark:bg-neutral-500">
         <tr>
           <th className="p-3 w-5 font-bold tracking-wide text-left">SN</th>
@@ -60,7 +60,7 @@ const Table: React.FC<Props> = ({ menu, onAction }) => {
                     icon={<EyeFilled />}
                     variant="solid"
                     color="yellow"
-                    onClick={() => onAction("view")}
+                    onClick={() => onAction("view", item)}
                   ></Button>
                 </Tooltip>
                 <Tooltip placement="top" title="Edit Menu">
@@ -68,7 +68,7 @@ const Table: React.FC<Props> = ({ menu, onAction }) => {
                     icon={<EditFilled />}
                     variant="solid"
                     color="purple"
-                    onClick={() => onAction("edit")}
+                    onClick={() => onAction("edit", item)}
                   ></Button>
                 </Tooltip>
                 <Tooltip placement="top" title="Delete Menu">
@@ -76,7 +76,7 @@ const Table: React.FC<Props> = ({ menu, onAction }) => {
                     icon={<DeleteFilled />}
                     variant="solid"
                     color="danger"
-                    onClick={() => onAction("delete")}
+                    onClick={() => onAction("delete", item)}
                   ></Button>
                 </Tooltip>
               </td>

@@ -2,6 +2,8 @@ import { Button, Rate, Radio, Select } from "antd";
 import type { RadioChangeEvent } from "antd";
 import React, { type Dispatch, type SetStateAction } from "react";
 import { Config } from "../../../../Config";
+import type { ErrorsType } from "../../../../types/formTypes";
+
 
 interface FormDataProps {
   id: string;
@@ -19,14 +21,6 @@ interface FormDataProps {
   image: string;
   setImage: Dispatch<SetStateAction<string>>;
 }
-
-type ErrorsType = {
-  title?: string | null;
-  price?: string | null;
-  category?: string | null;
-  rating?: string | null;
-  image?: string | null;
-};
 
 interface CreateMenuProps {
   formData: FormDataProps;

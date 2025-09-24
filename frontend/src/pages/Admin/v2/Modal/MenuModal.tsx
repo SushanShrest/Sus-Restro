@@ -5,6 +5,7 @@ import EditMenu from "../CRUD/EditMenu";
 import DeleteMenu from "../CRUD/DeleteMenu";
 import ViewMenu from "../CRUD/ViewMenu";
 import type { ErrorsType } from "../../../../types/formTypes";
+import type MenuItem from "../../../../types/menuItem";
 
 interface FormDataProps {
   id: string;
@@ -32,9 +33,10 @@ interface ModalMenuProps {
     handleOk: () => void;
     handleCancel: () => void;
   };
+  selectedItem:MenuItem | null;
 }
 
-const MenuModal: React.FC<ModalMenuProps> = ({ formData, loadMenu, modalProps  }) => {
+const MenuModal: React.FC<ModalMenuProps> = ({ formData, loadMenu, modalProps, selectedItem  }) => {
   const [errors, setErrors] = useState<ErrorsType>({});
   const { isModalOpen, modalMode, handleOk, handleCancel } = modalProps;
   const {
@@ -99,7 +101,7 @@ const MenuModal: React.FC<ModalMenuProps> = ({ formData, loadMenu, modalProps  }
             loadMenu={loadMenu}
           />
         )}
-        {modalMode === "view" && <ViewMenu />}
+        {modalMode === "view" && <ViewMenu item={selectedItem}/>}
         {modalMode === "edit" && <EditMenu />}
         {modalMode === "delete" && <DeleteMenu />}
       </Modal>

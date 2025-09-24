@@ -16,9 +16,10 @@ const Admin: React.FC = () => {
   const [category, setCategory] = useState<any>(null);
   const [image, setImage] = useState<string>("");
   const [todaySpecial, setTodaySpecial] = useState<boolean>(false);
+  const [selectedItem, setSelectedItem] = useState<MenuItem| null>(null);
 
   const { isModalOpen, modalMode, showModal, handleOk, handleCancel } =
-      useModal();
+    useModal();
 
   // Calls loadMenu on mount: fetches menu from API, sets state, handles errors;
   const loadMenu = async () => {
@@ -38,7 +39,7 @@ const Admin: React.FC = () => {
 
   return (
     <section className="dark:bg-neutral-800 dark:text-white">
-      <h2 className="text-2xl font-bold p-4 ">Menu List</h2>
+      <h2 className="text-2xl font-bold px-4 py-2 ">Menu List</h2>
       <div className="justify-self-end p-3">
         <Button
           variant="solid"
@@ -49,12 +50,13 @@ const Admin: React.FC = () => {
           Add Button
         </Button>
       </div>
-      <div className="overflow-auto rounded-ld">
+      <div className="overflow-auto">
         <Table
           menu={menu}
           //callback function
-          onAction={(mode) => {
+          onAction={(mode, item) => {
             showModal(mode);
+            setSelectedItem(item);
           }}
         />
 
@@ -77,6 +79,7 @@ const Admin: React.FC = () => {
           }}
           loadMenu={loadMenu}
           modalProps={{ isModalOpen, modalMode, handleOk, handleCancel }}
+          selectedItem={selectedItem}
         />
       </div>
     </section>
